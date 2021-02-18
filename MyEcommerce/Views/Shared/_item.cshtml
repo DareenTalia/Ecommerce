@@ -1,0 +1,35 @@
+﻿@model TbItem
+<div class="col-lg-3 col-md-4 col-sm-6 mix @Model.Category.CategoryName"  >
+
+    <div class="product__item">
+
+        @*href="/Item/Details"*@
+        <div    class="product__item__pic set-bg" data-setbg="@string.Format("/Uploads/{0}",Model.ImageName)">
+            <div class="label new">New</div>
+            <ul class="product__hover">
+                <li><a href="@string.Format("/Uploads/{0}",Model.ImageName)" class="image-popup"><span class="arrow_expand"></span></a></li>
+                <li><a href="#"><span class="icon_heart_alt"></span></a></li>
+                <li><a asp-controller="Item" asp-action="AddToCart" asp-route-id="@Model.ItemId"><span class="icon_bag_alt"></span></a></li>
+            </ul>
+
+          
+
+
+        </div>
+
+
+
+        <div class="product__item__text">
+            <h6><a asp-controller="Item" asp-action="Details" asp-route-id="@Model.ItemId">@Model.ItemName</a></h6>
+            <div class="rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+            </div>
+            <div class="product__price">@Model.SalesPrice</div>
+        </div>
+    </div>
+</div>
+

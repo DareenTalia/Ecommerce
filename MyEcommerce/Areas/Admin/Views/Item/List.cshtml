@@ -1,0 +1,73 @@
+﻿@model List<TbItem>
+@{
+    ViewData["Title"] = "List";
+}
+
+<!-- Zero configuration table -->
+<section id="basic-datatable">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Zero configuration</h4>
+                </div>
+                <div class="card-content">
+                    <div class="card-body card-dashboard">
+                        @*<p class="card-text">DataTables has most features enabled by default, so all you need to do to use it with your own ables is to call the construction function: $().DataTable();.</p>*@
+                     
+                            <a asp-controller="Item"  asp-action="Edit" class="btn btn-success">New </a>
+                        
+                        <div class="table-responsive">
+                            <table class="table zero-configuration table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Sales Price</th>
+                                        <th>Purchase Price</th>
+                                        <th>Image</th>
+                                        <th>Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                    <tr>
+                                        <td>@item.ItemName</td>
+                                        <td>@item.SalesPrice</td>
+                                        <td>@item.PurchasePrice</td>
+                                        <td>
+                                            <img src="@string.Format("/Uploads/{0}",item.ImageName)" width="50" height="50" />
+                                        </td>
+                                        <td>
+                                            <a class="btn btn-info" asp-controller="item" asp-action="Edit" asp-route-id="@item.ItemId">Edit</a>
+                                            <a onclick="confirm('Are You Sure ?')" class="btn btn-danger" asp-controller="item" asp-action="Delete" asp-route-Item="@item.ItemId">Delete</a>
+
+
+                                        </td>
+
+                                    </tr>
+                                    }
+
+
+                                </tbody>
+
+                                @*<tfoot>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Position</th>
+                                        <th>Office</th>
+                                        <th>Age</th>
+                                        <th>Start date</th>
+                                        <th>Salary</th>
+                                    </tr>
+                                </tfoot>*@
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/ Zero configuration table -->

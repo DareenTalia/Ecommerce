@@ -1,0 +1,9 @@
+C:\Users\DELL\source\repos\MyEcommerce\Domains\bin\Debug\netstandard2.0\Domains.deps.json
+C:\Users\DELL\source\repos\MyEcommerce\Domains\bin\Debug\netstandard2.0\Domains.dll
+C:\Users\DELL\source\repos\MyEcommerce\Domains\obj\Debug\netstandard2.0\Domains.csprojAssemblyReference.cache
+C:\Users\DELL\source\repos\MyEcommerce\Domains\obj\Debug\netstandard2.0\Domains.AssemblyInfoInputs.cache
+C:\Users\DELL\source\repos\MyEcommerce\Domains\obj\Debug\netstandard2.0\Domains.AssemblyInfo.cs
+C:\Users\DELL\source\repos\MyEcommerce\Domains\obj\Debug\netstandard2.0\Domains.csproj.CoreCompileInputs.cache
+C:\Users\DELL\source\repos\MyEcommerce\Domains\bin\Debug\netstandard2.0\Domains.pdb
+C:\Users\DELL\source\repos\MyEcommerce\Domains\obj\Debug\netstandard2.0\Domains.dll
+C:\Users\DELL\source\repos\MyEcommerce\Domains\obj\Debug\netstandard2.0\Domains.pdb

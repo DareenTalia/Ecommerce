@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "2ipXPR09ddn0G+FBlNp5JZPRewnmQBLN1uex+WudzKz13VHivk1ba05jRHvot6MQuSa9P2TM967yzZ1/VmacLw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\DELL\\source\\repos\\MyEcommerce\\Domains\\Domains.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\DELL\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

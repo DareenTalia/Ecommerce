@@ -1,0 +1,262 @@
+﻿@model IEnumerable<MyUser>
+
+@{
+    ViewData["Title"] = "ListUsers";
+}
+
+
+
+
+@section styles1{
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="~/Admin/app-assets/vendors/css/file-uploaders/dropzone.min.css">
+    <link rel="stylesheet" type="text/css" href=".~/Admin/app-assets/vendors/css/tables/datatable/extensions/dataTables.checkboxes.css">
+
+    <!-- END: Vendor CSS-->
+
+
+}
+
+
+
+@section styles2{
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="~/Admin/app-assets/css-rtl/plugins/file-uploaders/dropzone.css">
+    <link rel="stylesheet" type="text/css" href="~/Admin/app-assets/css-rtl/pages/data-list-view.css">
+    <!-- END: Page CSS-->
+
+}
+
+@section scripts1{
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="~/Admin/app-assets/vendors/js/extensions/dropzone.min.js"></script>
+    <script src="~/Admin/app-assets/vendors/js/tables/datatable/dataTables.select.min.js"></script>
+
+    <!-- END: Page Vendor JS-->
+}
+
+@section scripts2{
+
+    <!-- BEGIN: Page JS-->
+    <script src="~/Admin/app-assets/js/scripts/ui/data-list-view.js"></script>
+    <!-- END: Page JS-->
+}
+
+
+@section scripts{
+
+    <script src="~/Admin/assets/js/ConfirmDelete.js"></script>
+   
+}
+
+<!-- BEGIN: Content-->
+
+
+
+
+<div class="content-header row">
+    <div class="content-header-left col-md-9 col-12 mb-2">
+        <div class="row breadcrumbs-top">
+            <div class="col-12">
+                <h2 class="content-header-title float-left mb-0">List View</h2>
+                <div class="breadcrumb-wrapper col-12">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Home</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#">Data List</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            List View
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content-header-right text-md-right col-md-3 col-12 d-md-block d-none">
+        <div class="form-group breadcrum-right">
+            <div class="dropdown">
+                <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-settings"></i></button>
+                <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="#">Chat</a><a class="dropdown-item" href="#">Email</a><a class="dropdown-item" href="#">Calendar</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content-body">
+    <!-- Data list view starts -->
+    <section id="data-list-view" class="data-list-view-header">
+
+
+        <!-- DataTable starts -->
+        <div class="table-responsive">
+
+           
+            <a class="btn btn-success" asp-controller="Administration" asp-action="CreateUser"> Create User </a>
+            <table class="table data-list-view">
+                <thead>
+                    <tr>
+
+                        <th>NAME</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>City</th>
+                        <th>Image</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+
+                            <td class="product-name">@user.FirstName  @user.LastName</td>
+                            <td class="product-name">@user.Email</td>
+                            <td class="product-name">@user.PhoneNumber</td>
+                            <td class="product-name">@user.City</td>
+                            <td>
+                                <img src="@string.Format("/Uploads/{0}",user.ImageName)" width="80" height="80" />
+                            </td>
+
+                            <td>
+                                <a class="btn btn-info" asp-controller="Administration" asp-action="EditUser" asp-route-id="@user.Id">Edit</a>
+
+                                <form style="display:inline" method="post" asp-action="DeleteUser" asp-route-id="@user.Id">
+                                    @*<button onclick="return confirm('Are you sure you want to delete user : @user.UserName')" type="submit" class="btn btn-danger">Delete</button>*@
+
+
+                                    <span id="confirmDeleteSpan_@user.Id" style="display:none">
+                                        <span>هل انت متأكد من حذف هذاالمستخدم  ؟</span>
+                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                        <a href="#" class="btn btn-primary"
+                                           onclick="confirmDelete('@user.Id', false)">No</a>
+                                    </span>
+
+                                    <span id="deleteSpan_@user.Id">
+                                        <a href="#" class="btn btn-danger"
+                                           onclick="confirmDelete('@user.Id', true)">Delete</a>
+                                    </span>
+
+                                </form>
+                            </td>
+
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+        <!-- DataTable ends -->
+        <!-- add new sidebar starts -->
+        <div class="add-new-data-sidebar">
+            <div class="overlay-bg"></div>
+            <div class="add-new-data">
+                @foreach (var user in Model)
+                {
+
+                    <form asp-action="CreateUser" method="post" role="form"
+                          enctype="multipart/form-data">
+
+
+
+                        <div class="div mt-2 px-2 d-flex new-data-title justify-content-between">
+                            <div>
+                                <h4 class="text-uppercase">Adding New User</h4>
+                            </div>
+                            <div class="hide-data-sidebar">
+                                <i class="feather icon-x"></i>
+                            </div>
+                        </div>
+
+
+                        <div class="data-items pb-3">
+                            <div class="data-fields px-2 mt-3">
+                                <div class="row">
+                                    <div class="col-sm-12 data-field-col">
+                                        <label for="data-name">FirstName</label>
+                                        <input type="text" class="form-control" id="data-name" asp-for="@user.FirstName">
+                                        <span asp-validation-for="@user.FirstName"> </span>
+                                    </div>
+                                    <div class="col-sm-12 data-field-col">
+                                        <label for="data-category"> LastName </label>
+                                        <input type="text" class="form-control" id="data-name" asp-for="@user.LastName">
+                                        <span asp-validation-for="@user.LastName"> </span>
+                                    </div>
+
+                                    <div class="col-sm-12 data-field-col">
+                                        <label for="data-category"> Address </label>
+                                        <input type="text" class="form-control" id="data-name" asp-for="@user.Address">
+                                        <span asp-validation-for="@user.Address"> </span>
+                                    </div>
+
+                                    <div class="col-sm-12 data-field-col">
+                                        <label for="data-category"> City </label>
+                                        <input type="text" class="form-control" asp-for="@user.City">
+                                        <span asp-validation-for="@user.City"> </span>
+                                    </div>
+
+                                    <div class="col-sm-12 data-field-col">
+                                        <label for="data-category"> PhoneNumber </label>
+                                        <input type="text" class="form-control" asp-for="@user.PhoneNumber">
+                                        <span asp-validation-for="@user.PhoneNumber"> </span>
+                                    </div>
+
+
+
+                                    <div class="col-sm-12 data-field-col">
+                                        <label for="data-category"> Email </label>
+                                        <input type="text" class="form-control" asp-for="@user.Email">
+                                        <span asp-validation-for="@user.Email"> </span>
+                                    </div>
+
+                                    <div class="col-sm-12 data-field-col">
+                                        <label for="data-category"> UserName </label>
+                                        <input type="text" class="form-control" asp-for="@user.UserName">
+                                        <span asp-validation-for="@user.UserName"> </span>
+
+                                    </div>
+                                    <div class="col-sm-12 data-field-col">
+                                        <label for="data-category"> MyPassword </label>
+                                        <input type="password" class="form-control" asp-for="@user.PasswordHash">
+                                        <span asp-validation-for="@user.PasswordHash"> </span>
+                                    </div>
+
+
+                                    <div class="col-sm-12 data-field-col data-list-upload">
+
+                                        <div class="dz-message">Upload Image</div>
+                                        <input type="file" name="Files" class="form-control" placeholder="Upload Item Photo">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-data-footer d-flex justify-content-around px-3 mt-2">
+                            <div class="add-data-btn">
+                                <button class="btn btn-primary" asp-controller="Administration" asp-action="CreateUser">Add User</button>
+                            </div>
+                            <div class="cancel-data-btn">
+                                <button class="btn btn-outline-danger">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                }
+
+            </div>
+        </div>
+        <!-- add new sidebar ends -->
+    </section>
+    <!-- Data list view end -->
+
+</div>
+
+
+
+
+
+
+
+

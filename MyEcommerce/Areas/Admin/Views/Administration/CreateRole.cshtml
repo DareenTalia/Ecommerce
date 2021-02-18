@@ -1,0 +1,59 @@
+﻿@model CreateRoleViewModel
+@{
+    ViewData["Title"] = "CreateRole";
+}
+
+
+
+
+
+
+    <!-- BEGIN: Content-->
+  
+     
+
+            <div class="content-body">
+                <!-- Simple Validation start -->
+                <section class="simple-validation">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">Add Users Roles </h4>
+                                </div>
+                                <div class="card-content">
+                                    <div class="card-body">
+                                        <p class="mt-1">Role Name</p>
+                                        <form class="form-horizontal"  asp-action="CreateRole" method="post"   >
+                                            <div class="row text-danger"   asp-validation-summary="All">
+
+                                         
+
+
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <input type="text"  asp-for="RoleName"  class="form-control" placeholder="Role Name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Input Validation end -->
+              
+
+            </div>
+       
+   
+
+
+
+
+
